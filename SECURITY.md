@@ -1,21 +1,14 @@
-# Security notice
+﻿# TrialShield Security
 
-This is an experimental, debug-signed Android APK shared outside Google Play.
+This is a debug-signed experimental APK. Do not bypass Play Protect or
+Android's restrictions when installing or granting special notification access.
+Do not provide card numbers, passwords, UPI PINs, OTPs or other credentials.
 
-**Do not disable Play Protect, circumvent Android restricted settings, or
-bypass serious installer/security warnings** to install TrialShield or
-grant special notification access.
+- Bank CSV files are processed locally. No raw statement is saved in the app.
+- Gmail API code is present but OAuth is disabled pending official verification.
+- The enabled Gmail flow (when approved) would use a temporary OAuth token
+  only in memory; it is not stored, and no TrialShield server exists.
+- Notification discovery is opt-in and separate from Gmail/bank functions.
+- Exported JSON backups are unencrypted.
 
-Notification discovery is OFF by default, but Android notification access
-is sensitive because a listener may receive text from any notification,
-including bank alerts and verification codes. Only opt in if you
-understand this access. Turn it off in-app and revoke Android access
-separately in Settings when no longer needed.
-
-Avoid pasting passwords, payment card numbers or sensitive personal
-information. Exported JSON backup files are not encrypted.
-If reporting issues, do not post credentials, private messages,
-statements or other sensitive user data in public GitHub issues.
-
-The app does not contain cloud credentials, Gmail OAuth, third-party
-bank connections or automatic cancellation capability.
+Please report issues without personal or banking records in public GitHub Issues.
