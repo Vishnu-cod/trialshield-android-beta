@@ -1,1 +1,1 @@
-0d6a0f1aaf9546e73907ee086550cd9bcfa7492b9d278199432380d863beb9f0  TrialShield-v0.9-beta-debug.apk
+5586e5560b3096d7230e8506d7e980b51215a984719bb122600c1d31008f99c2  TrialShield-v0.10-cloud-foundation-debug.apk
