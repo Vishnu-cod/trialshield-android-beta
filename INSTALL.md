@@ -1,24 +1,32 @@
-# Install TrialShield on Android
+# TrialShield v0.9-beta installation and safety
 
-TrialShield is currently **not available on Google Play**.
+1. Open the official [GitHub Releases](https://github.com/Vishnu-cod/trialshield-android-beta/releases)
+   page and find the **v0.9-beta prerelease**.
+2. Expand **Assets** and download `TrialShield-v0.9-beta-debug.apk`.
+3. On Android, review any installer warning. Allow installation from
+   this trusted source only if you choose, and disable that source's
+   install permission afterward.
+4. **Do not bypass Play Protect or any serious security warning.**
+   If Android blocks the app or its notification-access permission,
+   stop and report the problem rather than disabling device protections.
+5. Open TrialShield and add your first trial. Notification reminders
+   are a separate Android permission under Protection settings.
+6. **Smart Discovery is optional**. If you choose to turn it on, read
+   the in-app disclosure: Android may allow access to ALL future
+   notifications, including sensitive messages and verification codes.
+   Granting the permission is your decision and is not needed for
+   manual tracking or reminder alerts.
+7. The app will queue potential subscription matches for review.
+   Nothing is tracked until you inspect and save a candidate.
 
-1. Open the official TrialShield GitHub repository's **Releases** page.
-2. Select release **v0.8-rc**, expand **Assets**, and download **TrialShield-v0.8-rc-debug.apk**. Do not download APKs from unrelated websites.
-3. Open the downloaded APK on your Android device. Android may ask whether you want to allow this browser or file manager to install apps. Review the request and allow it only if you trust the file.
-4. Confirm installation. Then, if you granted permission to install from that source, consider turning it off again in Android settings.
-5. Open TrialShield, allow notifications if you want reminders, and check the exact-alarm and battery settings shown in the app.
-6. Use **Protection settings → Test a reminder** to verify your device can show a test alert.
+## Updating and backing up
+Use the same package/signature to install the next debug APK over the
+previous version and normally keep local data. Back up first using
+TrialShield's **Export backup** button; JSON exports are unencrypted.
+No automatic updater or cloud synchronization exists.
 
-**If Android or Play Protect blocks the APK with a serious security warning, do not bypass or disable the protection.** Report the message to the developer and stop installation.
-
-## Updates
-
-There is no automatic updater. Download each later APK from the same official GitHub Releases page. Install over the old beta to retain data **only when the signing identity and package ID remain compatible**.
-
-Before changing phones or reinstalling, use **Export backup** to save your list. Backups are **unencrypted**, so keep them private.
-
-A future Google Play edition might use a different application ID or signature, and may require exporting and restoring your data instead of a direct update.
-
-## Troubleshooting reminders
-
-Android may require notification permission and separate precise-alarm access. Power-saving settings differ by phone. TrialShield cannot guarantee alarm delivery and does not cancel subscriptions for you. Keep another reminder for important charges.
+## Reminder limitations
+Android may delay or suppress background alerts (Doze, battery saver,
+device restrictions, disabled notifications). Use an independent
+reminder for important payments. TrialShield never cancels a
+third-party subscription.
