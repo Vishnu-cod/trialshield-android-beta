@@ -1,42 +1,51 @@
-# TrialShield v0.9-beta — Experimental Local Discovery
+# TrialShield v0.10 — Cloud Discovery Foundation
 
-**GitHub prerelease only.** Not Google Play approved. The APK is debug-signed,
-for testers, and should not be treated as a finished payment-protection app.
+**Status:** Experimental preview. The Gmail connector is implemented but
+**disabled** in this APK until Google Cloud OAuth registration and
+restricted-scope verification are complete. A real bank account connector
+is NOT yet available.
 
-## New
-- Optional **Smart Discovery**, OFF by default and enabled only after a
-  prominent disclosure plus Android's special notification permission.
-- On-device recognition of NEW notifications that combine a known service
-  with subscription/renewal context and a price or recognizable charge date.
-- Findings queue with source app, amount and date estimates, and
-  **Likely** / **Possible** confidence labels.
-- A review-and-add step that opens the editable trial dialog; no
-  silent additions or automatic charges.
-- Duplicate suppression for repeat notification matches.
-- Disable local discovery, dismiss individual findings, and erase discovery
-  records independently of already tracked trials.
-- Clear "Connected Mode coming later" notice; no fake Gmail/bank connection.
+## Added
+- A new **Gmail & Bank Discovery** panel.
+- **Bank CSV import** through the Android system document picker. Users select
+  their statement. On-device analysis finds possible recurring debits to
+  recognized merchants, without retaining the raw statement.
+- Conservative bank matching: Date, Description/Narration, Debit columns
+  (or Amount + DR/CR); repeated debit amounts within approximately 10%
+  and weekly/monthly/quarterly/annual timing intervals.
+- Bank discoveries need two or more similar past debits and are only
+  **possible**, not confirmed subscriptions. Exact future billing time is
+  unknown, so the Save button stays disabled until manually reviewed.
+- Gmail authorization client implemented with Google Play services and
+  Google's `gmail.readonly` OAuth scope; one-time Gmail API query code with
+  a 20-message cap and local snippet parsing.
+- Consent dialog, session-only results, and a Gmail authorization revocation
+  action. The Gmail connection is gated OFF in this preview, not a live
+  inbox scanner. No credentials requested or stored.
+- Owner setup guide covering verified Google OAuth and a lawful Indian
+  Account Aggregator/Financial Information User partnership.
+- No third-party bank passwords, UPI PINs, OTP capture or live bank access.
 
-## QA checks
-- 31 unit tests passed, including 9 new matcher cases.
-- Lint and debug APK compilation completed successfully.
-- Emulator: opted-in listener recognized a simulated Netflix renewal,
-  queued an estimate and did not store the original notification text.
-- Emulator: repeat suppressed, an unclear Spotify reminder marked Possible.
-- Emulator: trial was created only after review and explicit Save.
-- Emulator: turning discovery off ignored new messages; deleting
-  discovery history kept already tracked trials.
-- The local emulator QA records and test access were cleared afterward.
+## QA evidence
+- 43 automated tests passed.
+- Android debug APK build and lint succeeded.
+- Emulator: imported a synthetic bank CSV, proposed a Netflix ₹649/month
+  candidate after three historical debits; the Add Trial review showed
+  the candidate, and Save stayed disabled because the future date was blank.
+- No trial was created without explicit human confirmation.
+- Gmail OAuth could not be tested against an actual Gmail account because
+  a verified Google Cloud OAuth client has not been configured.
 
-## Important limitations
-Android's special notification permission may be considered sensitive and
-some devices/Play Protect may block sideloaded APKs using it. **Do not
-bypass serious security warnings or restricted settings.**
-The listener receives access to ALL future notifications when authorized,
-even though TrialShield attempts to filter locally and does not
-save raw bodies. Detection is not complete or foolproof.
+## Risks and limitations
+- No cloud backend, scheduled cloud sync, live account connections, automatic
+  payment cancellation, or confirmed charges.
+- The existing v0.9 notification discovery remains optional.
+- Gmail API access (if activated later) uses Internet permission and requires
+  Google's OAuth app verification for restricted scopes.
+- Bank CSV exports vary. Statement analysis can miss subscriptions and
+  can falsely suggest recurring purchases. Never treat these as guaranteed.
+- Android may delay reminders. Use an independent reminder for important bills.
+- This preview APK is debug-signed. Do not bypass Play Protect or Android
+  restricted-settings warnings to install it.
 
-No automatic canceling, Gmail integration, bank linkage, cloud sync,
-real billing confirmation or guaranteed alerts. Long-duration testing and
-policy/permissions review remain outstanding. Keep a separate reminder
-for important charges.
+Read `CLOUD_GMAIL_BANK_INTEGRATION.md` and `PRIVACY.md`.
