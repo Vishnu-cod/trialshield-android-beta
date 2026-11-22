@@ -1,31 +1,42 @@
-# TrialShield v0.8-rc — Testing prerelease
+# TrialShield v0.9-beta — Experimental Local Discovery
 
-**Release status:** Android testing preview. Mark this as a **GitHub prerelease** rather than a stable release.
+**GitHub prerelease only.** Not Google Play approved. The APK is debug-signed,
+for testers, and should not be treated as a finished payment-protection app.
 
-### Included
-- Improved dark theme contrast, first-use guidance, and prominent next-charge summary.
-- Local trial tracking using Room, editing, deletion, and confirmed-cancellation state.
-- Scheduled 72h/24h/2h reminders (and an urgent late-added-trial reminder).
-- On-device text import from Android Share/paste with manual review.
-- Currency-aware monthly estimates and billing-cycle options.
-- 20 provider-owned account/cancellation guides.
-- User-controlled, unencrypted JSON backup export and confirmed merge restore.
-- Home-screen widget provider and local diagnostic reminder button.
-- Proposed next-renewal date, subject to user confirmation.
+## New
+- Optional **Smart Discovery**, OFF by default and enabled only after a
+  prominent disclosure plus Android's special notification permission.
+- On-device recognition of NEW notifications that combine a known service
+  with subscription/renewal context and a price or recognizable charge date.
+- Findings queue with source app, amount and date estimates, and
+  **Likely** / **Possible** confidence labels.
+- A review-and-add step that opens the editable trial dialog; no
+  silent additions or automatic charges.
+- Duplicate suppression for repeat notification matches.
+- Disable local discovery, dismiss individual findings, and erase discovery
+  records independently of already tracked trials.
+- Clear "Connected Mode coming later" notice; no fake Gmail/bank connection.
 
-### Validation completed
-- Android package version: `0.8-rc` (`versionCode 8`).
-- **22 automated tests passed** in development.
-- Debug APK signature verified with Android's APK signer.
-- Prior emulator tests covered import review, billing calculations, reminders, and trial edits.
-- Installed successfully on a POCO X6 Pro during development; local database was preserved.
+## QA checks
+- 31 unit tests passed, including 9 new matcher cases.
+- Lint and debug APK compilation completed successfully.
+- Emulator: opted-in listener recognized a simulated Netflix renewal,
+  queued an estimate and did not store the original notification text.
+- Emulator: repeat suppressed, an unclear Spotify reminder marked Possible.
+- Emulator: trial was created only after review and explicit Save.
+- Emulator: turning discovery off ignored new messages; deleting
+  discovery history kept already tracked trials.
+- The local emulator QA records and test access were cleared afterward.
 
-### Known issues / important disclosures
-- Does **not** directly cancel subscriptions or stop payments.
-- Reminder timing is not guaranteed under Android Doze, OEM battery restrictions, or disabled notification permissions; long-duration physical-device testing is incomplete.
-- No automatic Gmail reading, billing API integration, 500-service directory, or in-app updates.
-- Widget appearance/refresh on a range of devices remains unverified.
-- This is a **debug-signed** preview. Do not enter sensitive payment details.
-- Not yet published, signed for Google Play production, or approved by Google's review.
+## Important limitations
+Android's special notification permission may be considered sensitive and
+some devices/Play Protect may block sideloaded APKs using it. **Do not
+bypass serious security warnings or restricted settings.**
+The listener receives access to ALL future notifications when authorized,
+even though TrialShield attempts to filter locally and does not
+save raw bodies. Detection is not complete or foolproof.
 
-**If a serious install security warning appears, do not disable Android protections to proceed.**
+No automatic canceling, Gmail integration, bank linkage, cloud sync,
+real billing confirmation or guaranteed alerts. Long-duration testing and
+policy/permissions review remain outstanding. Keep a separate reminder
+for important charges.
